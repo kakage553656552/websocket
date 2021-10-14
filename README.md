@@ -1,4 +1,4 @@
-# websocket
+# socket
 
 > A Vue.js project
 
