@@ -14,7 +14,8 @@ export default {
     return {
       msg: "",
       socket:null,
-      arr:[]
+      arr:[],
+      id:null
     };
   },
   created(){
@@ -22,13 +23,16 @@ export default {
     this.socket.on('connect',()=>{
       this.$message.success('你连接上websocket啦')
     })
+    this.socket.on('setId',(id)=>{
+      this.id = id
+    })
     this.socket.on('message',(msg)=>{
       this.arr.push(msg)
     })
   },
   methods: {
     submit() {
-      this.socket.emit('message',this.msg)
+      this.socket.emit('message',this.msg,this.id)
       this.msg = ''
     }
   }
