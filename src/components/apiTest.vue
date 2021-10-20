@@ -32,10 +32,10 @@ export default {
     };
   },
   created() {
-    this.test();
+    this.getUserList();
   },
   methods: {
-    test() {
+    getUserList() {
       this.loading = true;
       this.$http.get("/test").then((res) => {
         console.log(res);
@@ -50,7 +50,12 @@ export default {
       this.$http.post("/insert",params).then((res) => {
         console.log(res);
         this.loading = false;
-      });
+        this.getUserList()
+        this.formInline = {}
+      }).catch(()=>{
+        this.loading = false;
+        this.formInline = {}
+      })
     }
   },
 };
