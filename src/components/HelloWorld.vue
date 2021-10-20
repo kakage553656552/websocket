@@ -5,7 +5,6 @@
     <el-button style="margin-top: 20px" @click="submit" type="primary"
       >提交</el-button
     >
-    <el-button @click="test" type="primary">testApi</el-button>
   </div>
 </template>
 
@@ -16,8 +15,9 @@ export default {
   data() {
     return {
       msg: "",
-      socket: null,
       arr: [],
+      socket:null,
+      id:null
     };
   },
   created() {
@@ -33,13 +33,8 @@ export default {
     submit() {
       this.socket.emit("message", this.msg);
       this.msg = "";
-    },
-    test() {
-      this.$http.get("/test").then((res) => {
-        console.log(res);
-      });
-    },
-  },
+    }
+  }
 };
 </script>
 
