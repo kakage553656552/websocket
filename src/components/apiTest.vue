@@ -1,23 +1,37 @@
 <template>
   <div>
-    <el-form :inline="true" :model="formInline" class="demo-form-inline">
-      <el-form-item label="Name">
-        <el-input v-model="formInline.name" placeholder="请输入名字"></el-input>
-      </el-form-item>
-      <el-form-item label="Age">
-        <el-input v-model="formInline.age" placeholder="请输入年龄"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">提交</el-button>
-      </el-form-item>
-    </el-form>
     <div v-loading="loading">
+      <el-button size="mini" @click="addOrUpdateHandler"  type="primary">新增</el-button>
       <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="id" label="Id"> </el-table-column>
         <el-table-column prop="name" label="Name"> </el-table-column>
-        <el-table-column prop="age" label="Age"> </el-table-column>
+        <el-table-column prop="age" label="Age"></el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button @click="deleteHandler(scope.row)" size="mini" type="text">删除</el-button>
+            <el-button @click="addOrUpdateHandler(scope.row)" size="mini" type="text">修改</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
+    <el-dialog
+      title="修改"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose">
+      <el-form label-position="left" :inline="true" :model="formInline" class="demo-form-inline">
+        <el-form-item label="Name:" label-width="60px" >
+          <el-input size="mini" v-model="formInline.name" placeholder="请输入名字"></el-input>
+        </el-form-item>
+        <el-form-item label="Age:" label-width="60px">
+          <el-input size="mini" v-model="formInline.age" placeholder="请输入年龄"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button size="mini" @click="dialogVisible = false">取 消</el-button>
+        <el-button size="mini" type="primary" @click="onSubmit(formInline)">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -28,34 +42,74 @@ export default {
     return {
       tableData: [],
       loading: false,
-      formInline:{}
+      formInline:{},
+      dialogVisible:false,
+      updateInfo:{}
     };
   },
   created() {
     this.getUserList();
   },
   methods: {
-    getUserList() {
-      this.loading = true;
-      this.$http.get("/test").then((res) => {
-        console.log(res);
-        this.tableData = res.data;
-        this.loading = false;
-      });
+    handleClose() {
+      this.dialogVisible = false
+      this.formInline = {}
     },
-    onSubmit() {
-      console.log(this.formInline);
-      this.loading = true;
-      var params = this.formInline
-      this.$http.post("/insert",params).then((res) => {
+    addOrUpdateHandler(row) {
+      console.log(row);
+      if(row.id) {
+        this.formInline = JSON.parse(JSON.stringify(row))
+      }
+      this.dialogVisible = true
+    },
+    deleteHandler(row) {
+      console.log(row);
+      var params = {
+        id:row.id
+      }
+      this.loading = true
+      this.$http.delete("/delete",{params}).then((res) => {
         console.log(res);
-        this.loading = false;
         this.getUserList()
         this.formInline = {}
       }).catch(()=>{
         this.loading = false;
         this.formInline = {}
       })
+    },
+    getUserList() {
+      this.loading = true;
+      this.$http.get("/test").then((res) => {
+        console.log(res);
+        this.tableData = res.data.data;
+        this.loading = false;
+      });
+    },
+    onSubmit() {
+      console.log(this.formInline);
+      if(!this.formInline.id) {
+        this.loading = true;
+        var params = this.formInline
+        this.$http.post("/insert",params).then((res) => {
+          console.log(res);
+          this.getUserList()
+          this.handleClose()
+        }).catch(()=>{
+          this.loading = false;
+          this.handleClose()
+        })
+      }else {
+        this.loading = true;
+        var params = this.formInline
+        this.$http.post("/update",params).then((res) => {
+          console.log(res);
+          this.getUserList()
+          this.handleClose()
+        }).catch(()=>{
+          this.loading = false;
+          this.handleClose()
+        })
+      }
     }
   },
 };
