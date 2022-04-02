@@ -1,7 +1,13 @@
 <template>
   <div>
-    11{{dis}}
-    <el-button type="primary" :loading="dis">add</el-button>
+    11{{visible}}
+    <el-button type="primary" @click="visible = !visible">add</el-button>
+    <Dialog :visible="visible" title="title" :show-close="true" width="800px" top="200px" :before-close="beforeCloseHander" >
+      <div slot="title">
+        <div style="color:red">slot title</div>
+      </div>
+      999999999
+    </Dialog>
   </div>
 </template>
  
@@ -10,10 +16,14 @@ export default {
   data() {
     return {
       loading: true,
-      dis:''
+      dis:'',
+      visible: false
     }
   },
   methods: {
+    beforeCloseHander() {
+
+    }
   }
 }
 
