@@ -14,7 +14,7 @@
         :use-css-transforms="true"
       >
         <grid-item
-          v-for="(item,index) in layoutData"
+          v-for="(item) in layoutData"
           :x="item.x"
           :y="item.y"
           :w="item.w"
@@ -26,7 +26,7 @@
           :static="item.static"
           @resized="resizedEvent"
           @moved="movedEvent"
-        >{{ index }}</grid-item>
+        ><line-chart ref="gadget" style="width: 100%; height: 100%" :item="item"></line-chart></grid-item>
       </grid-layout>
     </div>
   </div>
@@ -35,7 +35,7 @@
  <script>
 import layoutData from './layoutData.json'
 import VueGridLayout from 'vue-grid-layout'
-
+import lineChart from '@/components/line-chart'
 const GridLayout = VueGridLayout.GridLayout
 const GridItem = VueGridLayout.GridItem
 export default {
@@ -56,7 +56,8 @@ export default {
   },
   components: {
     GridLayout,
-    GridItem
+    GridItem,
+    lineChart
   },
   methods: {
     init() {
@@ -64,6 +65,7 @@ export default {
     },
     resizedEvent(i, newH, newW, newHPx, newWPx) {
       console.log("大小改变完了", i, newH, newW, newHPx, newWPx);
+      this.$refs.gadget[0].resize()
     },
     movedEvent(i, newX, newY) {
       console.log("移动结束了", i, newX, newY);
@@ -88,6 +90,7 @@ export default {
 </script>
  <style scoped>
 .vue-grid-item {
-  background: aquamarine;
+  /* background: aquamarine; */
+  border: 1px solid #ccc;
 }
 </style>

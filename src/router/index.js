@@ -3,8 +3,9 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import apiTest from '@/components/apiTest'
 import login from '@/components/login'
-import Gridlayout from '@/components/gridlayout'
-import Test from '@/components/test'
+import lineChart from '@/components/line-chart'
+// import Gridlayout from '@/components/gridlayout'
+// import Test from '@/components/test'
 
 Vue.use(Router)
 
@@ -13,12 +14,12 @@ export default new Router({
     {
       path: '/test',
       name: 'Test',
-      component: Test
+      component: () => import( /* webpackChunkName: 'Test' */ '@/components/test' )   //实现路由懒加载
     },
     {
       path: '/gridlayout',
       name: 'Gridlayout',
-      component: Gridlayout
+      component: () => import( /* webpackChunkName: 'Gridlayout' */ '@/components/gridlayout' )  //实现路由懒加载
     },
     {
       path: '/helloworld',
@@ -34,6 +35,11 @@ export default new Router({
       path: '/apiTest',
       name: 'apiTest',
       component: apiTest
+    },
+    {
+      path: '/lineChart',
+      name: 'lineChart',
+      component: lineChart
     }
   ]
 })

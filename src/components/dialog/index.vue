@@ -42,7 +42,6 @@ export default {
   },
   data () {
     return {
-
     }
   },
   watch: {
@@ -77,7 +76,8 @@ export default {
       if (this.$attrs['before-close']) {
         this.$attrs['before-close']()
       }
-      this.$parent.visible = false
+      // this.visible = false
+      this.$emit('update:visible',false)
     },
     launchFullScreen (element) {
       if (element.requestFullscreen) {
