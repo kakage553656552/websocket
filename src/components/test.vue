@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button @click="visible=!visible">open</el-button>
+    <!-- <el-button @click="visible=!visible">open</el-button>
     <testComponentVue v-slot="scope">
       <Dialog :visible.sync="visible" title="title" :show-close="true" width="800px" top="200px" :before-close="beforeCloseHander" >
         <div slot="title">
@@ -8,7 +8,15 @@
         </div>
         {{scope.msg}}
       </Dialog>
-    </testComponentVue>
+    </testComponentVue> -->
+    <ka-tag type="" closable @close="close" @click="click">AAA</ka-tag>
+    <!-- <ka-tag type="success" closable @close="close">AAA</ka-tag>
+    <ka-tag type="info" closable @close="close">AAA</ka-tag>
+    <ka-tag type="danger" closable @close="close">AAA</ka-tag>
+    <ka-tag type="warning" closable @close="close">AAA</ka-tag>
+    <el-tag effect="light" closable>AAAA</el-tag> -->
+    <!-- <el-tag effect="dark" closable>AAAA</el-tag>
+    <el-tag effect="plain" closable>AAAA</el-tag> -->
   </div>
 </template>
  
@@ -17,21 +25,27 @@ import testComponentVue from "./test-component.vue";
 export default {
   components: {
     testComponentVue
-  },
+},
   data() {
     return {
       loading: true,
       dis:'',
-      visible: false
+      visible: false,
+      arr:[
+        'aaa','bbb','ccc'
+      ]
     }
   },
   methods: {
-    beforeCloseHander() {
-
+    close() {
+      console.log('close');
+    },
+    click() {
+      console.log('click');
     }
   },
   created() {
-    console.log(this.$style.red);
+    // console.log(this.$style.red);
   }
 }
 
