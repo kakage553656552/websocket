@@ -21,7 +21,7 @@
 </template>
  
  <script>
-import testComponentVue from "./test-component.vue";
+import testComponentVue from "@/components/test-component.vue";
 export default {
   components: {
     testComponentVue

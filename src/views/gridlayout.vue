@@ -33,7 +33,7 @@
 </template>
  
  <script>
-import layoutData from './layoutData.json'
+import layoutData from '@/components/layoutData.json'
 import VueGridLayout from 'vue-grid-layout'
 import lineChart from '@/components/line-chart'
 const GridLayout = VueGridLayout.GridLayout

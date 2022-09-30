@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
-import apiTest from '@/components/apiTest'
-import login from '@/components/login'
-import lineChart from '@/components/line-chart'
-// import Gridlayout from '@/components/gridlayout'
-// import Test from '@/components/test'
+import HelloWorld from '@/views/HelloWorld'
+import apiTest from '@/views/apiTest'
+import login from '@/views/login'
+// import Gridlayout from '@/views/gridlayout'
+// import Test from '@/views/test'
 
 Vue.use(Router)
 
@@ -14,17 +13,17 @@ export default new Router({
     {
       path: '/test',
       name: 'Test',
-      component: () => import( /* webpackChunkName: 'Test' */ '@/components/test' )   //实现路由懒加载
+      component: () => import( /* webpackChunkName: 'Test' */ '@/views/test' )   //实现路由懒加载
     },
     {
-      path: '/test111',
-      name: 'Test111',
-      component: () => import( /* webpackChunkName: 'Test111' */ '@/components/vue-happy-bus' )   //实现路由懒加载
+      path: '/vueHappyBus',
+      name: 'vueHappyBus',
+      component: () => import( /* webpackChunkName: 'Test111' */ '@/views/vue-happy-bus' )   //实现路由懒加载
     },
     {
       path: '/gridlayout',
       name: 'Gridlayout',
-      component: () => import( /* webpackChunkName: 'Gridlayout' */ '@/components/gridlayout' )  //实现路由懒加载
+      component: () => import( /* webpackChunkName: 'Gridlayout' */ '@/views/gridlayout' )  //实现路由懒加载
     },
     {
       path: '/helloworld',
@@ -40,11 +39,6 @@ export default new Router({
       path: '/apiTest',
       name: 'apiTest',
       component: apiTest
-    },
-    {
-      path: '/lineChart',
-      name: 'lineChart',
-      component: lineChart
     }
   ]
 })
