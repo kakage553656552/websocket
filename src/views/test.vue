@@ -9,6 +9,8 @@
         {{scope.msg}}
       </Dialog>
     </testComponentVue> -->
+    <div>{{count}}</div>
+    <div>{{count1}}</div>
     <ka-tag type="" closable @close="close" @click="click">AAA</ka-tag>
     <!-- <ka-tag type="success" closable @close="close">AAA</ka-tag>
     <ka-tag type="info" closable @close="close">AAA</ka-tag>
@@ -22,6 +24,7 @@
  
  <script>
 import testComponentVue from "@/components/test-component.vue";
+import {mapState,mapGetters,mapMutations,mapActions} from 'vuex'
 export default {
   components: {
     testComponentVue
@@ -37,13 +40,25 @@ export default {
       Bus: this.$Bus(this)
     }
   },
+  computed: {
+    ...mapState(['count']),
+    ...mapGetters(['getAddCount']),
+    ...mapState('user',['count1']),
+  },
   methods: {
     close() {
       console.log('close');
     },
     click() {
-      console.log('click');
-    }
+      this.increment()
+      this.actionsincrement()
+      this.actionsincrement1()
+      this.increment1()
+    },
+    ...mapMutations(['increment']),
+    ...mapMutations('user',['increment1']),
+    ...mapActions(['actionsincrement']),
+    ...mapActions('user',['actionsincrement1'])
   },
   created() {
     // console.log(this.$style.red);

@@ -10,6 +10,20 @@ import Dialog from '@/components/dialog'
 import kaTag from '@/components/tag'
 // Vue.use(axios)
 import Bus from 'vue-happy-bus'
+import {store} from '@/store'
+// import Vuex from 'vuex'
+// Vue.use(Vuex)
+
+// const store = new Vuex.Store({
+//   state: {
+//     count: 0
+//   },
+//   mutations: {
+//     increment (state) {
+//       state.count++
+//     }
+//   }
+// })
 Vue.prototype.$Bus = Bus
 axios.defaults.baseURL = 'http://192.168.0.105:9000'
 Vue.prototype.$http = axios
@@ -23,6 +37,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
