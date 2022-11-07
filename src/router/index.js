@@ -26,7 +26,7 @@ export default new Router({
       component: () => import( /* webpackChunkName: 'Gridlayout' */ '@/views/gridlayout' )  //实现路由懒加载
     },
     {
-      path: '/helloworld',
+      path: '/helloworld',  // websocket
       name: 'HelloWorld',
       component: HelloWorld
     },

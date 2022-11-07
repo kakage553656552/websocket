@@ -9,7 +9,8 @@ import axios from 'axios'
 import Dialog from '@/components/dialog'
 import kaTag from '@/components/tag'
 // Vue.use(axios)
-
+import Bus from 'vue-happy-bus'
+Vue.prototype.$Bus = Bus
 axios.defaults.baseURL = 'http://192.168.0.105:9000'
 Vue.prototype.$http = axios
 Vue.use(ElementUI);

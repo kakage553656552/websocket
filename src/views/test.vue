@@ -33,7 +33,8 @@ export default {
       visible: false,
       arr:[
         'aaa','bbb','ccc'
-      ]
+      ],
+      Bus: this.$Bus(this)
     }
   },
   methods: {
@@ -46,6 +47,7 @@ export default {
   },
   created() {
     // console.log(this.$style.red);
+    this.Bus.$on('event:bus',e=>console.log(e))
   }
 }
 

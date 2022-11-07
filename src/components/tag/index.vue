@@ -23,7 +23,8 @@ export default {
   },
   data() {
     return {
-      show: true
+      show: true,
+      Bus:this.$Bus(this)
     }
   },
   methods: {
@@ -34,6 +35,7 @@ export default {
     click() {
       console.log(this)
       this.$emit('click')
+      this.Bus.$emit('event:bus','AAAAASDGLAKJSDG;LASDJGGGGGGGGGGGGGGGGGG')
     }
   }
 }

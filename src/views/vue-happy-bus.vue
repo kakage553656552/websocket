@@ -6,9 +6,6 @@
 </template>
  
  <script>
-import Vue from 'vue'
-import Bus from 'vue-happy-bus'
-Vue.prototype.$Bus = Bus
 export default {
   data() {
     return {
