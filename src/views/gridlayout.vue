@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <div class="board" style="width: 100%">
     <div class="home">
       <el-button type="primary" size="mini" @click="add">Add</el-button>
@@ -92,4 +92,4 @@ export default {
   /* background: aquamarine; */
   border: 1px solid #ccc;
 }
-</style> -->
+</style>
