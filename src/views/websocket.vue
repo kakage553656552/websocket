@@ -1,6 +1,7 @@
 <template>
   <div>
-    <el-input v-model="msg" placeholder="请输入内容"></el-input>
+    <div class="el-icon-s-custom" style="margin-bottom:10px">{{ id}}</div>
+    <el-input v-model="msg" placeholder="请输入内容" @keyup.enter.native="submit"></el-input>
     <div v-for="item in arr" :key="item">{{ item }}</div>
     <el-button style="margin-top: 20px" @click="submit" type="primary"
       >提交</el-button
@@ -35,6 +36,7 @@ export default {
   },
   methods: {
     submit() {
+      debugger
       this.socket.emit("message", this.msg,this.id);
       this.msg = "";
     }
