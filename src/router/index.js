@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/views/HelloWorld'
+import websocket from '@/views/websocket'
 import apiTest from '@/views/apiTest'
 import login from '@/views/login'
 // import Gridlayout from '@/views/gridlayout'
@@ -36,9 +36,9 @@ export default new Router({
       component: () => import( /* webpackChunkName: 'Gridlayout' */ '@/views/gridlayout' )  //实现路由懒加载
     },
     {
-      path: '/helloworld',  // websocket
-      name: 'HelloWorld',
-      component: HelloWorld
+      path: '/websocket',  // websocket
+      name: 'websocket',
+      component: websocket
     },
     {
       path: '/login',

@@ -11,7 +11,7 @@
 <script>
 import { io } from "socket.io-client";
 export default {
-  name: "HelloWorld",
+  name: "websocket",
   data() {
     return {
       msg: "",
