@@ -21,7 +21,7 @@ export default new Router({
       component: () => import( /* webpackChunkName: 'Test' */ '@/views/test111' )   //实现路由懒加载
     },
     {
-      path: '/test222',     // 未配置
+      path: '/test222',     // 递规组件
       name: 'Test222',
       component: () => import( /* webpackChunkName: 'Test' */ '@/views/test222' )   //实现路由懒加载
     },
