@@ -57,7 +57,6 @@ export default {
 
       option && myChart.setOption(option);
       myChart.on('click', params => {
-        debugger
       })
     },
   },

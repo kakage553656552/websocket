@@ -2,6 +2,7 @@
   <span v-if="show" :class="['ka_tag',`ka_tag--${type}`,`ka_tag--${size}`]" :style="{backgroundColor:color,cursor: $listeners.click?'pointer':''}" @click="click">
     <slot></slot>
     <i v-if="closable" :class="['ka_close','el-icon-close']" @click.stop="clickHandler"></i>
+    AAA={{aaa}}
   </span>
 </template>
 <script>
@@ -18,6 +19,9 @@ export default {
       type: String
     },
     size: {
+      type: String
+    },
+    aaa: {
       type: String
     }
   },
@@ -36,6 +40,7 @@ export default {
       console.log(this)
       this.$emit('click')
       this.Bus.$emit('event:bus','AAAAASDGLAKJSDG;LASDJGGGGGGGGGGGGGGGGGG')
+      this.$emit('log','alsdkgjap;osdlkfgja;lsdkjf;alksdjfg;alksdhfgkla')
     }
   }
 }

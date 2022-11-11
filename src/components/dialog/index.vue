@@ -65,8 +65,6 @@ export default {
   },
   methods: {
     // oppendToBody () {
-    //   // eslint-disable-next-line no-debugger
-    //   debugger
     //   this.$nextTick(() => {
     //     var model = document.getElementById('model')
     //     document.body.appendChild(model)

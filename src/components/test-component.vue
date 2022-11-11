@@ -3,6 +3,7 @@
     test component
      <slot v-bind:msg="msg">
       </slot>
+      <ka-tag v-bind="$attrs" v-on="$listeners">AAA</ka-tag>
   </div>
 </template>
  
@@ -22,7 +23,6 @@ export default {
     }
   },
   created() {
-    debugger
     console.log(this.$style.red);
   }
 }

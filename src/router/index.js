@@ -11,9 +11,19 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: '/test',
+      path: '/test',     // 测试vuex以及自定义的tag组件
       name: 'Test',
       component: () => import( /* webpackChunkName: 'Test' */ '@/views/test' )   //实现路由懒加载
+    },
+    {
+      path: '/test111',     // 测试$attrs和$listeners
+      name: 'Test111',
+      component: () => import( /* webpackChunkName: 'Test' */ '@/views/test111' )   //实现路由懒加载
+    },
+    {
+      path: '/test222',     // 未配置
+      name: 'Test222',
+      component: () => import( /* webpackChunkName: 'Test' */ '@/views/test222' )   //实现路由懒加载
     },
     {
       path: '/vueHappyBus',

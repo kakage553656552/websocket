@@ -26,6 +26,7 @@ export default {
       this.$message.success("你连接上websocket啦");
     });
     this.socket.on("message", (msg) => {
+      console.log(11111)
       this.arr.push(msg);
     });
   },

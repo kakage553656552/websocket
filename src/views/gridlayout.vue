@@ -75,7 +75,6 @@ export default {
       this.layoutData.forEach(item => {
         arr.push(item.y)
       });
-      debugger
       var y = Math.max.apply(Math,arr)
       this.temData.y = y+1
       this.temData.i = this.layoutData.length
