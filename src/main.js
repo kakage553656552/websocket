@@ -25,7 +25,7 @@ import {store} from '@/store'
 //   }
 // })
 Vue.prototype.$Bus = Bus
-axios.defaults.baseURL = 'http://192.168.0.105:9000'
+axios.defaults.baseURL = 'http://localhost:9000'
 Vue.prototype.$http = axios
 Vue.use(ElementUI);
 Vue.use(Dialog)

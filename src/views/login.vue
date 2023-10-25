@@ -1,11 +1,11 @@
 <template>
   <div>
     <el-form label-position="left" :inline="true" :model="formInline" class="demo-form-inline">
-        <el-form-item label="Name:" label-width="60px" >
+        <el-form-item label="Name:" label-width="100px" >
           <el-input size="mini" v-model="formInline.name" placeholder="请输入名字"></el-input>
         </el-form-item>
-        <el-form-item label="Age:" label-width="60px">
-          <el-input size="mini" v-model="formInline.age" placeholder="请输入年龄"></el-input>
+        <el-form-item label="PassWord:" label-width="100px">
+          <el-input size="mini" v-model="formInline.password" placeholder="请输入年龄"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">

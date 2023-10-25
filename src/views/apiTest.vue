@@ -5,7 +5,7 @@
       <el-table :data="tableData" style="width: 100%">
         <el-table-column prop="id" label="Id"> </el-table-column>
         <el-table-column prop="name" label="Name"> </el-table-column>
-        <el-table-column prop="age" label="Age"></el-table-column>
+        <el-table-column prop="password" label="Password"></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button @click="deleteHandler(scope.row)" size="mini" type="text">删除</el-button>
@@ -20,11 +20,11 @@
       width="30%"
       :before-close="handleClose">
       <el-form label-position="left" :inline="true" :model="formInline" class="demo-form-inline">
-        <el-form-item label="Name:" label-width="60px" >
+        <el-form-item label="Name:" label-width="100px" >
           <el-input size="mini" v-model="formInline.name" placeholder="请输入名字"></el-input>
         </el-form-item>
-        <el-form-item label="Age:" label-width="60px">
-          <el-input size="mini" v-model="formInline.age" placeholder="请输入年龄"></el-input>
+        <el-form-item label="Password:" label-width="100px">
+          <el-input size="mini" v-model="formInline.password" placeholder="请输入年龄"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
