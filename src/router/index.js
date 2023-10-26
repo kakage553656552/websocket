@@ -3,13 +3,19 @@ import Router from 'vue-router'
 import websocket from '@/views/websocket'
 import apiTest from '@/views/apiTest'
 import login from '@/views/login'
+import home from '@/views/home'
 // import Gridlayout from '@/views/gridlayout'
 // import Test from '@/views/test'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
+    {
+      path: '/home',     
+      name: 'Home',
+      component: () => import( /* webpackChunkName: 'Test' */ '@/views/home' )   //实现路由懒加载
+    },
     {
       path: '/test',     // 测试vuex以及自定义的tag组件
       name: 'Test',
@@ -52,3 +58,18 @@ export default new Router({
     }
   ]
 })
+router.beforeEach((to, from, next) => {
+  if(hasToken()) {
+    next()
+  } else {
+    if(to.path === '/login') {
+      next()
+    }else {
+      next('/login')
+    }
+  }
+});
+export default router
+export const hasToken = () =>{
+  return localStorage.getItem('token')
+}

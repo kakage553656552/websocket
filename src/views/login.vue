@@ -5,7 +5,7 @@
           <el-input size="mini" v-model="formInline.name" placeholder="请输入名字"></el-input>
         </el-form-item>
         <el-form-item label="PassWord:" label-width="100px">
-          <el-input size="mini" v-model="formInline.password" placeholder="请输入年龄"></el-input>
+          <el-input size="mini" v-model="formInline.password" placeholder="请输入密码"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -36,8 +36,12 @@ export default {
         if(res.data.code !=0) {
           return this.$message.error('登录失败')
         }
+        debugger
+        if(res.data.token) {
+          localStorage.setItem('token',res.data.token)
+        }
         this.$message.success('登录成功')
-        this.$router.push('/test')
+        this.$router.push('/home')
         this.handleClose()
       }).catch(()=>{
         this.loading = false;

@@ -24,7 +24,7 @@
           <el-input size="mini" v-model="formInline.name" placeholder="请输入名字"></el-input>
         </el-form-item>
         <el-form-item label="Password:" label-width="100px">
-          <el-input size="mini" v-model="formInline.password" placeholder="请输入年龄"></el-input>
+          <el-input size="mini" v-model="formInline.password" placeholder="请输入密码"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">

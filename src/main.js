@@ -11,6 +11,7 @@ import kaTag from '@/components/tag'
 // Vue.use(axios)
 import Bus from 'vue-happy-bus'
 import {store} from '@/store'
+import '@/assets/css/common.css'
 // import Vuex from 'vuex'
 // Vue.use(Vuex)
 
