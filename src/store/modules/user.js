@@ -2,7 +2,8 @@ export default {
     namespaced:true,
   state: {
     count1: 100,
-    timer: null
+    timer: null,
+    userInfo: null
   },
   getters: {
     getAddCount1(state) {
@@ -12,6 +13,9 @@ export default {
   mutations: {
     increment1(state) {
       state.count1++
+    },
+    setUserInfo(state, newUserInfo) {
+      state.userInfo = newUserInfo
     }
   },
   actions: {

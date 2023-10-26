@@ -1,16 +1,11 @@
 <template>
   <div>
-    <pageheader/>
-    <router-view/>
+    404
   </div>
 </template>
 
 <script>
-import pageheader from '@/components/pageheader.vue'
 export default {
-  components: {
-    pageheader
-  },
   data() {
     return {
     }

@@ -36,10 +36,11 @@ export default {
         if(res.data.code !=0) {
           return this.$message.error('登录失败')
         }
-        debugger
-        if(res.data.token) {
-          localStorage.setItem('token',res.data.token)
+        if(res.data.data.token) {
+          localStorage.setItem('token',res.data.data.token)
         }
+
+        this.$store.commit('user/setUserInfo',res.data.data)
         this.$message.success('登录成功')
         this.$router.push('/home')
         this.handleClose()

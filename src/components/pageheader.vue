@@ -6,13 +6,21 @@
 </template>
 
 <script>
+import api from '@/api'
 export default {
   data() {
     return {
     }
   },
   methods: {
-    signOut() {
+    async signOut() {
+      let params = {
+        id:this.$store.state.user.userInfo.id
+      }
+      const {data:res} = await api.signOut(params)
+      if(res.code !== 0) {
+        return this.$message.error(res.message)
+      }
       localStorage.removeItem('token')
       this.$router.push('/login')
     }

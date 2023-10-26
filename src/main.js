@@ -27,6 +27,17 @@ import '@/assets/css/common.css'
 // })
 Vue.prototype.$Bus = Bus
 axios.defaults.baseURL = 'http://localhost:9000'
+// // 请求拦截器
+// axios.interceptors.request.use(function (config) {
+//   // 在请求发送前，添加自定义请求头
+//   const token = localStorage.getItem('token');
+//   if (token) {
+//     config.headers['token'] = token;
+//   }
+//   return config;
+// }, function (error) {
+//   return Promise.reject(error);
+// });
 Vue.prototype.$http = axios
 Vue.use(ElementUI);
 Vue.use(Dialog)
