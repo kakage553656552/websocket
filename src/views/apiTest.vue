@@ -56,20 +56,21 @@ export default {
       this.formInline = {}
     },
     addOrUpdateHandler(row) {
-      console.log(row);
       if(row.id) {
         this.formInline = JSON.parse(JSON.stringify(row))
       }
       this.dialogVisible = true
     },
     deleteHandler(row) {
-      console.log(row);
       var params = {
         id:row.id
       }
       this.loading = true
-      this.$http.delete("/delete",{params}).then((res) => {
-        console.log(res);
+      this.$http.delete("/delete",{params}).then(({data:res}) => {
+        this.loading = false;
+        if(res.code !== 0) {
+          return this.$message.error(res.msg)
+        }
         this.getUserList()
         this.formInline = {}
       }).catch(()=>{
@@ -79,19 +80,24 @@ export default {
     },
     getUserList() {
       this.loading = true;
-      this.$http.get("/test").then((res) => {
-        console.log(res);
-        this.tableData = res.data.data;
+      this.$http.get("/test").then(({data:res}) => {
+        this.loading = false;
+        if(res.code !== 0) {
+          return this.$message.error(res.msg)
+        }
+        this.tableData = res.data;
         this.loading = false;
       });
     },
     onSubmit() {
-      console.log(this.formInline);
       if(!this.formInline.id) {
         this.loading = true;
         var params = this.formInline
-        this.$http.post("/insert",params).then((res) => {
-          console.log(res);
+        this.$http.post("/insert",params).then(({data:res}) => {
+          this.loading = false;
+          if(res.code !== 0) {
+            return this.$message.error(res.msg)
+          }
           this.getUserList()
           this.handleClose()
         }).catch(()=>{
@@ -101,8 +107,11 @@ export default {
       }else {
         this.loading = true;
         var params = this.formInline
-        this.$http.post("/update",params).then((res) => {
-          console.log(res);
+        this.$http.post("/update",params).then(({data:res}) => {
+          this.loading = false;
+          if(res.code !== 0) {
+            return this.$message.error(res.msg)
+          }
           this.getUserList()
           this.handleClose()
         }).catch(()=>{
