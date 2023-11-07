@@ -33,6 +33,8 @@ export default {
       this.loading = true;
       var params = this.formInline
       this.$http.post("/login",params).then((res) => {
+        // eslint-disable-next-line no-debugger
+        debugger
         if(res.data.code !=0) {
           return this.$message.error('登录失败')
         }
