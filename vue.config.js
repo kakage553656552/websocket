@@ -20,6 +20,11 @@ module.exports = defineConfig({
       '/api': {
         target: 'http://120.46.34.178',
         changeOrigin: true
+      },
+      // 配置代理
+      '/socket.io': {
+        target: 'http://120.46.34.178',
+        changeOrigin: true
       }
     }
   }
