@@ -1,7 +1,10 @@
 <template>
   <div class="pageheader">
     <div></div>
-    <div class="right cursor" @click="signOut">Sign Out</div>
+    <div style="width: 100px;display: flex;align-items: center;justify-content: space-between;">
+      <div class="">{{ $store.state.user.userInfo.name }}</div>
+      <div class="right cursor icon-link" @click="signOut">Sign Out</div>
+    </div>
   </div>
 </template>
 
@@ -57,5 +60,6 @@ export default {
 
 .pageheader .right {
   margin-right: 10px;
+  font-size: 12px;
 }
 </style>
