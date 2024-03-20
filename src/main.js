@@ -14,7 +14,7 @@ import '@/assets/css/common.css'
 import '@/assets/css/iconfont/iconfont.css'
 Vue.config.productionTip = false
 Vue.prototype.$Bus = Bus
-axios.defaults.baseURL = 'http://localhost:9000'
+axios.defaults.baseURL = 'http://120.46.34.178'
 // // 请求拦截器
 // axios.interceptors.request.use(function (config) {
 //   // 在请求发送前，添加自定义请求头
@@ -26,6 +26,7 @@ axios.defaults.baseURL = 'http://localhost:9000'
 // }, function (error) {
 //   return Promise.reject(error);
 // });
+axios.defaults.baseURL = '/api'
 Vue.prototype.$http = axios
 Vue.use(ElementUI);
 Vue.use(Dialog)
