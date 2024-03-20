@@ -22,7 +22,7 @@ export default {
     };
   },
   created() {
-    this.socket = io("http://120.46.34.178/api?token=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    this.socket = io("http://120.46.34.178?token=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     this.socket.on("connect", () => {
       this.$message.success("你连接上websocket啦");
     });
