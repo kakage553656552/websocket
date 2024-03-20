@@ -37,7 +37,8 @@ export default {
         if(res.code !== 0) {
           return this.$message.error(res.msg)
         }
-        this.getUserList()
+        this.$message.success('Congratulations on your successful registration')
+        this.$router.push('/login')
         this.handleClose()
       }).catch(()=>{
         this.loading = false;
