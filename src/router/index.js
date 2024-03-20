@@ -56,6 +56,11 @@ const router = new Router({
       component: () => import( /* webpackChunkName: 'Gridlayout' */ '@/views/login' )  //实现路由懒加载
     },
     {
+      path: '/signup',
+      name: 'signup',
+      component: () => import( /* webpackChunkName: 'Gridlayout' */ '@/views/signup' )  //实现路由懒加载
+    },
+    {
       path: '*',
       name: 'page404',
       component: () => import( /* webpackChunkName: 'Gridlayout' */ '@/views/page404' )  //实现路由懒加载
@@ -64,9 +69,12 @@ const router = new Router({
 })
 router.beforeEach((to, from, next) => {
   if(hasToken()) {
+    if(to.path === '/login'){
+      next('/home')
+    }
     next()
   } else {
-    if(to.path === '/login') {
+    if(to.path === '/login'||to.path === '/signup') {
       next()
     }else {
       next('/login')
