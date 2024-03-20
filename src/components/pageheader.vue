@@ -1,28 +1,45 @@
 <template>
   <div class="pageheader">
     <div></div>
-    <div class="right" @click="signOut">Sign Out</div>
+    <div class="right cursor" @click="signOut">Sign Out</div>
   </div>
 </template>
 
 <script>
 import api from '@/api'
 export default {
-  data() {
+  data () {
     return {
     }
   },
   methods: {
-    async signOut() {
-      let params = {
-        id:this.$store.state.user.userInfo.id
-      }
-      const {data:res} = await api.signOut(params)
-      if(res.code !== 0) {
-        return this.$message.error(res.message)
-      }
-      localStorage.removeItem('token')
-      this.$router.push('/login')
+    async signOut () {
+      this.$confirm('Are you sure you want to log out?', 'Prompt', {
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      }).then(async() => {
+        let params = {
+          id: this.$store.state.user.userInfo.id
+        }
+        const { data: res } = await api.signOut(params)
+        if (res.code !== 0) {
+          return this.$message.error(res.message)
+        }
+        localStorage.removeItem('token')
+        this.$store.commit('user/deleteUserInfo');
+        this.$router.push('/login')
+        this.$message({
+          type: 'success',
+          message: 'Logged out successfully!'
+        });
+      }).catch(() => {
+        // this.$message({
+        //   type: 'info',
+        //   message: ''
+        // });
+      });
+
     }
   }
 }
@@ -37,6 +54,7 @@ export default {
   align-items: center;
   color: white;
 }
+
 .pageheader .right {
   margin-right: 10px;
 }

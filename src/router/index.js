@@ -69,7 +69,7 @@ const router = new Router({
 })
 router.beforeEach((to, from, next) => {
   if(hasToken()) {
-    if(to.path === '/login'){
+    if(to.path === '/login'||to.path === '/signup'){
       next('/home')
     }
     next()

@@ -10,7 +10,7 @@ import Dialog from '@/components/dialog'
 import kaTag from '@/components/tag'
 // Vue.use(axios)
 import Bus from 'vue-happy-bus'
-import '@/assets/css/common.css'
+import '@/assets/css/common.scss'
 import '@/assets/css/iconfont/iconfont.css'
 Vue.config.productionTip = false
 Vue.prototype.$Bus = Bus

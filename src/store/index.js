@@ -2,6 +2,11 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 import user from './modules/user'
+const getDefaultState = () => {
+  return {
+    // 初始状态
+  }
+}
 export default new Vuex.Store({
   namespaced:true,
   state: {

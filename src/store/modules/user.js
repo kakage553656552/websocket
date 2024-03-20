@@ -16,6 +16,9 @@ export default {
     },
     setUserInfo(state, newUserInfo) {
       state.userInfo = newUserInfo
+    },
+    deleteUserInfo(state) {
+      state.userInfo = null
     }
   },
   actions: {

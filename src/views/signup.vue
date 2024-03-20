@@ -1,50 +1,43 @@
 <template>
-  <div>
-    <el-form label-position="left" :inline="true" :model="formInline" class="demo-form-inline">
-        <el-form-item label="Name:" label-width="100px" >
-          <el-input size="mini" v-model="formInline.name" placeholder="请输入名字"></el-input>
-        </el-form-item>
-        <el-form-item label="PassWord:" label-width="100px">
-          <el-input size="mini" v-model="formInline.password" placeholder="请输入密码"></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button size="mini" @click="dialogVisible = false">取 消</el-button>
-        <el-button size="mini" type="primary" @click="onSubmit(formInline)">确 定</el-button>
-      </span>
+  <div class="login-container">
+    <el-form label-position="left" :inline="true" :model="formInline" class="login-form">
+      <el-form-item label="Name:" label-width="100px">
+        <el-input size="mini" v-model="formInline.name" placeholder="" style="width: 200px;"></el-input>
+      </el-form-item>
+      <el-form-item label="Password:" label-width="100px">
+        <el-input size="mini" v-model="formInline.password" placeholder="" show-password style="width: 200px;"></el-input>
+      </el-form-item>
+    </el-form>
+    <div class="login-buttons">
+      <el-button size="mini" @click="handleClose">Cancel</el-button>
+      <el-button size="mini" type="primary" @click="onSubmit(formInline)" :loading="loading">Comfirm</el-button>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "apiTest",
+  name: "LoginForm",
   data() {
     return {
       loading: false,
-      formInline:{},
+      formInline: {},
     };
   },
   methods: {
     handleClose() {
-      this.dialogVisible = false
-      this.formInline = {}
+      this.dialogVisible = false;
+      this.formInline = {};
     },
-    onSubmit(formInline) {
+    onSubmit() {
       this.loading = true;
       var params = this.formInline
-      this.$http.post("/login",params).then((res) => {
-        // eslint-disable-next-line no-debugger
-        debugger
-        if(res.data.code !=0) {
-          return this.$message.error('登录失败')
+      this.$http.post("/insert",params).then(({data:res}) => {
+        this.loading = false;
+        if(res.code !== 0) {
+          return this.$message.error(res.msg)
         }
-        if(res.data.data.token) {
-          localStorage.setItem('token',res.data.data.token)
-        }
-
-        this.$store.commit('user/setUserInfo',res.data.data)
-        this.$message.success('登录成功')
-        this.$router.push('/home')
+        this.getUserList()
         this.handleClose()
       }).catch(()=>{
         this.loading = false;
@@ -55,21 +48,21 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
-h2 {
-  font-weight: normal;
+.login-container {
+  max-width: 400px;
+  margin: 30vh auto;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+.login-form {
+  margin-bottom: 20px;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+
+.login-buttons {
+  text-align: right;
 }
 </style>
