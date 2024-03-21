@@ -1,0 +1,21 @@
+name: Deploy to Nginx Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install SSH key
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
+
+      - name: Deploy to Nginx server
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa Administrator@120.46.34.178 "cd C:\nginx\html && git pull"
