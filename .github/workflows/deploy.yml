@@ -14,9 +14,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install SSH key
-        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > $env:USERPROFILE\.ssh\id_rsa && icacls $env:USERPROFILE\.ssh\id_rsa /inheritance:r && icacls $env:USERPROFILE\.ssh\id_rsa /grant:r "%USERNAME%":F
+        run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > $env:USERPROFILE\.ssh\id_rsa && attrib +R $env:USERPROFILE\.ssh\id_rsa
 
       - name: Deploy to Nginx server
         run: |
           ssh -o StrictHostKeyChecking=no -i $env:USERPROFILE\.ssh\id_rsa Administrator@120.46.34.178 "cd C:\nginx\html && git pull"
 
+          ssh -o StrictHostKeyChecking=no -i $env:USERPROFILE\.ssh\id_rsa Administrator@120.46.34.178 "cd C:\nginx\html && npm install"
+
+          ssh -o StrictHostKeyChecking=no -i $env:USERPROFILE\.ssh\id_rsa Administrator@120.46.34.178 "cd C:\nginx\html && npm run build"
+
+          scp -r -o StrictHostKeyChecking=no -i $env:USERPROFILE\.ssh\id_rsa C:/nginx/html/dist/folder/* Administrator@120.46.34.178:/C/nginx/html/
