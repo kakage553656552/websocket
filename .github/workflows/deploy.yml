@@ -18,7 +18,7 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          port: 3389
+          port: 22
           script: |
             # Clean the deployment directory on Windows Server
             Remove-Item -Recurse -Force /c/deploy-temp/*
