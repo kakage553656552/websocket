@@ -1,0 +1,7 @@
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: List files in .ssh directory
+        run: ls -l $HOME/.ssh
