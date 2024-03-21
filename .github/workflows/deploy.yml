@@ -1,44 +1,24 @@
-name: Deploy to Windows Server
+name: Deploy to Ubuntu Server
 
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+    - name: Install SSH key
+      run: echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa && chmod 600 ~/.ssh/id_rsa
 
-      - name: Deploy to Windows Server
-        uses: appleboy/ssh-action@master
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          host: ${{ secrets.SERVER_IP }}
-          port: 22
-          script: |
-            # Clean the deployment directory on Windows Server
-            Remove-Item -Recurse -Force /c/deploy-temp/*
-
-            # Copy repository files to the deployment directory
-            scp -r ./* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:/c/deploy-temp/
-
-            # Navigate to the deployment directory
-            cd /c/deploy-temp
-            
-            # Pull the latest code, install dependencies, and build
-            git pull
-            npm install
-            npm run build
-
-            # Move the build artifacts to the Nginx html directory
-            Remove-Item -Recurse -Force /c/nginx/html/*
-            Move-Item /c/deploy-temp/dist/* /c/nginx/html
-
-            # Reload or restart Nginx to apply the changes
-            # This assumes that your service name is 'nginx'
-            Restart-Service nginx
+    - name: SSH into server, create temporary directory, and clone repository
+      run: |
+        ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} << 'EOF'
+          mkdir temp_repo
+          cd temp_repo
+          git clone https://github.com/kakage553656552/websocket.git
+        EOF
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
