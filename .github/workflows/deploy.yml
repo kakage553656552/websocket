@@ -16,9 +16,9 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          # username: ${{ secrets.SERVER_USERNAME }}
-          # password: ${{ secrets.SERVER_PASSWORD }}
-          # port: 22
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          port: 22
           script: |
             # Clean the deployment directory on Windows Server
             Remove-Item -Recurse -Force /c/deploy-temp/*
