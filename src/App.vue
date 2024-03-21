@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    test github actions
+    test github actions 1
     <!-- <div style="height: 100vh;height: 40vh;" v-loading="loading"
     element-loading-text="拼命加载中"
     element-loading-spinner="cuifont icon_alert_urgent"
