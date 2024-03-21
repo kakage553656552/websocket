@@ -18,6 +18,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
+          host: ${{ secrets.SERVER_IP }}
           port: 22
           script: |
             # Clean the deployment directory on Windows Server
