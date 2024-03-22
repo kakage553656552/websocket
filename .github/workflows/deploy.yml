@@ -31,7 +31,7 @@ jobs:
     - name: SSH into server, create temporary directory, and clone repository
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} << 'EOF'
-          ls -1 $GITHUB_WORKSPACE
+          cp -r $GITHUB_WORKSPACE/dist/* /etc/nginx/html/
         EOF
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
