@@ -32,10 +32,9 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} << 'EOF'
           ls -1 $GITHUB_WORKSPACE
-          # cp -r $GITHUB_WORKSPACE/dist/* /etc/nginx/html/
         EOF
     - name: Transfer dist folder to server
       run: |
-        scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE/dist/* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:/etc/nginx/html/
+        scp -o StrictHostKeyChecking=no -r $GITHUB_WORKSPACE/dist/* ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:/var/www/html
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
