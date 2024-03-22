@@ -24,6 +24,9 @@ jobs:
           mkdir temp_repo
           cd temp_repo
           git clone https://github.com/kakage553656552/websocket.git
+          cd websocket
+          npm install
+          npm run build
         EOF
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
