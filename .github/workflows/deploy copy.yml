@@ -1,4 +1,4 @@
-name: Deploy to Server
+name: Deploy to Ubuntu Server
 
 on:
   push:
@@ -8,20 +8,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: 
+      name: production
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      
-    - name: Install dependencies
-      run: npm install
-      
-    - name: Build project
-      run: npm run build
-      
-    - name: List files in GitHub workspace
-      run: ls -1 $GITHUB_WORKSPACE
-      
     - name: Create SSH directory
       run: mkdir -p ~/.ssh
 
@@ -31,7 +21,15 @@ jobs:
     - name: SSH into server, create temporary directory, and clone repository
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} << 'EOF'
-          ls -1 $GITHUB_WORKSPACE
+          if [ -d "temp_repo" ]; then
+            rm -rf temp_repo
+          fi
+          mkdir temp_repo
+          cd temp_repo
+          git clone https://github.com/kakage553656552/websocket.git
+          cd websocket
+          npm install
+          npm run build
         EOF
       env:
         SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
