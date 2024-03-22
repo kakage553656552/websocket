@@ -21,6 +21,9 @@ jobs:
     - name: SSH into server, create temporary directory, and clone repository
       run: |
         ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} << 'EOF'
+          if [ -d "temp_repo" ]; then
+            rm -rf temp_repo
+          fi
           mkdir temp_repo
           cd temp_repo
           git clone https://github.com/kakage553656552/websocket.git
